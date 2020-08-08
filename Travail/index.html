@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>TRAVAIL</title>
+    <link rel="stylesheet" href="css/materialize.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <style>
+        @media only screen and (max-width: 600px) {
+        #no-mobile {
+            display: none;
+        }
+    .city_card{
+        display: none;
+    }
+        .airport{
+            margin-top: 10px;
+        }
+         .date{
+            font-size: 10px;
+        }
+        .src_dest{
+           
+        }
+        .flight_name{
+            width: 30px;
+            height: auto;
+        }
+        .time_1{
+            font-size: 15px;
+        }
+        .departure_time{
+            font-size: 5px;
+        }
+        .stops{
+            margin-right:5px;
+            margin-top= -10px;
+             font-size:7px;
+        }
+        .airport{
+            font-size: 10px;
+            margin-right:-25px;
+        }
+        .fare_flight{
+            font-size: 15px;
+            margin-top:20px;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+        .book_ticket {
+        background-color: black;
+        opacity: 0.7;
+        margin-top: 20px;
+        /* Green */
+        border: 1px solid white;
+        border-radius: 6px;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 8px;
+        width: 45px;
+        margin-left: 20px;
+    }
+     #preload{
+     position: fixed;
+     left: 25%;
+     top:40%;
+     z-index: +99;
+     display: none;
+}
+
+    }
+
+    @media only screen and (min-width: 600px) {
+
+        footer {
+            font-size: 14px;
+        }
+       .date{
+            font-size: 10px;
+        }
+        .src_dest{
+            width: 15px;
+        }
+        .flight_name{
+            width: 50px;
+            height: auto;
+        }
+        .time_1{
+            font-size: 25px;
+        }
+        .departure_time{
+            font-size: 10px;
+        }
+        .stops{
+            margin-right:50px;
+             margin-top= -10px;
+              font-size:10px;
+        }
+        .airport{
+            margin-right:-25px;
+        }
+        .fare_flight{
+            font-size: 20px;
+            margin-top:20px;
+        }
+        .book_ticket {
+        background-color: black;
+        opacity: 0.7;
+        margin-top: 20px;
+        /* Green */
+        border: 1px solid white;
+        border-radius: 10px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        width: 115px;
+    }
+      #preload{
+     position: fixed;
+     left: 45%;
+     top:40%;
+     z-index: +99;
+     display: none;
+}
+
+    }
+    /*css for collapsible*/
+    /* Radio Buttons
+   ========================================================================== */
+
+    [type="radio"]:not(:checked),
+    [type="radio"]:checked {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    [type="radio"]:not(:checked)+span,
+    [type="radio"]:checked+span {
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        display: inline-block;
+        height: 25px;
+        line-height: 25px;
+        font-size: 1rem;
+        -webkit-transition: .28s ease;
+        transition: .28s ease;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    [type="radio"]+span:before,
+    [type="radio"]+span:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 4px;
+        width: 16px;
+        height: 16px;
+        z-index: 0;
+        -webkit-transition: .28s ease;
+        transition: .28s ease;
+    }
+    /* Unchecked styles */
+
+    [type="radio"]:not(:checked)+span:before,
+    [type="radio"]:not(:checked)+span:after,
+    [type="radio"]:checked+span:before,
+    [type="radio"]:checked+span:after,
+    [type="radio"].with-gap:checked+span:before,
+    [type="radio"].with-gap:checked+span:after {
+        border-radius: 50%;
+    }
+
+    [type="radio"]:not(:checked)+span:before,
+    [type="radio"]:not(:checked)+span:after {
+        border: 2px solid #5a5a5a;
+    }
+
+    [type="radio"]:not(:checked)+span:after {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    /* Checked styles */
+
+    [type="radio"]:checked+span:before {
+        border: 2px solid transparent;
+    }
+
+    [type="radio"]:checked+span:after,
+    [type="radio"].with-gap:checked+span:before,
+    [type="radio"].with-gap:checked+span:after {
+        border: 2px solid #26a69a;
+    }
+
+    [type="radio"]:checked+span:after,
+    [type="radio"].with-gap:checked+span:after {
+        background-color: #26a69a;
+    }
+
+    [type="radio"]:checked+span:after {
+        -webkit-transform: scale(1.02);
+        transform: scale(1.02);
+    }
+    /* Radio With gap */
+
+    [type="radio"].with-gap:checked+span:after {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+    }
+    /* Focused styles */
+
+    [type="radio"].tabbed:focus+span:before {
+        -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    /* Disabled Radio With gap */
+
+    [type="radio"].with-gap:disabled:checked+span:before {
+        border: 2px solid rgba(0, 0, 0, 0.42);
+    }
+
+    [type="radio"].with-gap:disabled:checked+span:after {
+        border: none;
+        background-color: rgba(0, 0, 0, 0.42);
+    }
+    /* Disabled style */
+
+    [type="radio"]:disabled:not(:checked)+span:before,
+    [type="radio"]:disabled:checked+span:before {
+        background-color: transparent;
+        border-color: rgba(0, 0, 0, 0.42);
+    }
+
+    [type="radio"]:disabled+span {
+        color: rgba(0, 0, 0, 0.42);
+    }
+
+    [type="radio"]:disabled:not(:checked)+span:before {
+        border-color: rgba(0, 0, 0, 0.42);
+    }
+
+    [type="radio"]:disabled:checked+span:after {
+        background-color: rgba(0, 0, 0, 0.42);
+        border-color: #949494;
+    }
+
+    .fa {
+        padding: 20px;
+        font-size: 20px;
+        width: 50px;
+        text-align: center;
+        text-decoration: none;
+    }
+    /* Add a hover effect if you want */
+
+    .fa:hover {
+        opacity: 0.7;
+    }
+    /* Set a specific color for each brand */
+    /* Facebook */
+
+    .fa-facebook {
+        background: #3B5998;
+        color: white;
+    }
+    /* Twitter */
+
+    .fa-twitter {
+        background: #55ACEE;
+        color: white;
+    }
+    /* Twitter */
+
+    .fa-google {
+        background: #f44336;
+        color: white;
+    }
+    /* Twitter */
+
+    .fa-linkedin {
+        background: #0288d1;
+        color: white;
+    }
+
+
+    .search {
+        background-color: black;
+        opacity: 0.7;
+        /* Green */
+        border: 1px solid white;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        padding: 15px 32px;
+        margin-left: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        width: 175px;
+    }
+
+    .filter{
+        background-color: #06243a ;
+        opacity: 0.9;
+    }
+    .filter-checkbox{
+        display:inline-block;
+       padding: 12px;
+       border: 0.5px solid white;
+        margin-right:4px;
+        border-radius: 3%;
+    }
+
+
+    .switch-filter{
+        display:inline-block;
+    }
+    .switch-filter1{
+        display: inline-block;
+    }
+
+
+    .search:hover {
+        opacity: 1;
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 24px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover {
+        opacity: 0.7;
+        color: white;
+    }
+
+    .topnav .icon {
+        display: none;
+    }
+
+    .logo {
+        margin-left: 20px;
+    }
+
+
+    @media screen and (max-width: 600px) {
+        .topnav a:not(:first-child) {
+            display: none;
+        }
+        .topnav a.icon {
+            float: right;
+            display: block;
+            color: black;
+        }
+    }
+    /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+
+    @media screen and (max-width: 600px) {
+        .topnav.responsive {
+            position: relative;
+        }
+        .topnav.responsive a.icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: black;
+        }
+        .topnav.responsive a {
+            background-color: #182D54;
+            opacity: 1;
+            color: white;
+            float: none;
+            display: block;
+            text-align: left;
+        }
+       .topnav.responsive #login{
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+    }
+
+    }
+
+    button-small {
+        background-color: transparent;
+        color: black;
+    }
+
+
+    #login {
+        font-size: 18px;
+        color: black;
+        font-weight: bold;
+    }
+
+    #preload_back {
+
+        background-image: url('img/dest3.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: auto;
+    }
+
+   
+
+    #loader {
+        display: block;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #2196f3;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    #loader:before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #1a237e;
+        -webkit-animation: spin 3s linear infinite;
+        animation: spin 3s linear infinite;
+    }
+
+    #loader:after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: #06243a;
+        -webkit-animation: spin 1.5s linear infinite;
+        animation: spin 1.5s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    .pulsate {
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+    opacity: 0.5;
+}
+@-webkit-keyframes pulsate {
+    0% { 
+        opacity: 0.2;
+    }
+    50% { 
+        opacity: 1.0;
+    }
+    100% { 
+        opacity: 0.2;
+    }
+}
+    </style>
+    <div id="preload">
+        <div class="preloader-wrapper big active" style="background-color: transparent;">
+            <div id="preloader">
+                <div id="loader"></div>
+            </div>
+        </div>
+    </div>
+    <div id="preload_back">
+        <div class="topnav" id="myTopnav">
+            <a href="index.html"> <img src="img/v2.png" style="height: 60px;width:60px"></a>
+            <a href="index.html">FLIGHTS</a>
+            <a href="contactus.html">CONTACT US</a>
+            <a href="about.html">ABOUT US</a>
+            <a id="logout_button"></a>
+            <a id="login_button"></a>
+            
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="card transparent" style="margin:10px 10px 10px 10px">
+            <div class="row center" style="background-color:#06243a;color:white;opacity: 1;padding:20px;">
+                <div class="row" style="height:2px">
+                    <div class="col s6 m4 l2">
+                        <label>
+                            <input name="group1" type="radio" id="two" data-val="round" checked class="group1" />
+                            <span style="font-size:18px;">Round Trip</span>
+                        </label>
+                    </div>
+                    <div class="col s6 m4 l2">
+                        <label>
+                            <input name="group1" type="radio" id="one" data-val="one" class="group1" />
+                            <span style="font-size:18px;">One Way</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row" style="padding:10px;height: 10px">
+                    <div class="input-field col s5 m5 l2" style="padding-top:20px;">
+                        <select class="input-field browser-default" style="background-color:#06243a;color:white" id="fromair" value="DEL">
+                            <option value="" disabled selected>From</option>
+                            <option value="IXA">Agartala, IXA</option>
+                            <option value="AGX">Agatti Island, AGX</option>
+                            <option value="AGR">Agra, AGR</option>
+                            <option value="AMDa">Ahmedabad, AMDa</option>
+                            <option value="AJL">Aizawl, AJL</option>
+                            <option value="AKD">Akola, AKD</option>
+                            <option value="IXD">Allahabad, IXD</option>
+                            <option value="IXV">Along, IXV</option>
+                            <option value="ATQ">Amritsar, ATQ</option>
+                            <option value="IXU">Aurangabad, IXU</option>
+                            <option value="BLR">Bangalore, BLR</option>
+                            <option value="BEK">Bareilly, BEK</option>
+                            <option value="BUP">Bathinda, BUP</option>
+                            <option value="IXG">Belgaum, IXG</option>
+                            <option value="BEP">Bellary, BEP</option>
+                            <option value="VDY">Bellary, VDY</option>
+                            <option value="BHU">Bhavnagar, BHU</option>
+                            <option value="BHO">Bhopal, BHO</option>
+                            <option value="BBI">Bhubaneswar, BBI</option>
+                            <option value="BHJ">Bhuj, BHJ</option>
+                            <option value="BKB">Bikaner, BKB</option>
+                            <option value="PAB">Bilaspur, PAB</option>
+                            <option value="CBD">Car Nicobar, CBD</option>
+                            <option value="IXC">Chandigarh, IXC</option>
+                            <option value="MAA">Chennai, MAA</option>
+                            <option value="CJB">Coimbatore, CJB</option>
+                            <option value="COH">Cooch Behar, COH</option>
+                            <option value="NMB">Daman, NMB</option>
+                            <option value="DED">Dehradun, DED</option>
+                            <option value="DEL">Delhi, DEL</option>
+                            <option value="DBD">Dhanbad, DBD</option>
+                            <option value="DHM">Dharmsala, DHM</option>
+                            <option value="DIB">Dibrugarh, DIB</option>
+                            <option value="DMU">Dimapur, DMU</option>
+                            <option value="DIU">Diu, DIU</option>
+                            <option value="RDP">Durgapur, RDP</option>
+                            <option value="COK">Ernakulam, COK</option>
+                            <option value="GAY">Gaya, GAY</option>
+                            <option value="GOI">Goa, GOI</option>
+                            <option value="GOP">Gorakhpur, GOP</option>
+                            <option value="GAU">Guwahati, GAU</option>
+                            <option value="GWL">Gwalior, GWL</option>
+                            <option value="HBX">Hubli, HBX</option>
+                            <option value="HYD">Hyderabad, HYD</option>
+                            <option value="IMF">Imphal, IMF</option>
+                            <option value="IDR">Indore, IDR</option>
+                            <option value="JLR">Jabalpur, JLR</option>
+                            <option value="JGB">Jagdalpur, JGB</option>
+                            <option value="JAI">Jaipur, JAI</option>
+                            <option value="JSA">Jaisalmer, JSA</option>
+                            <option value="IXJ">Jammu, IXJ</option>
+                            <option value="JGA">Jamnagar, JGA</option>
+                            <option value="IXW">Jamshedpur, IXW</option>
+                            <option value="JDH">Jodhpur, JDH</option>
+                            <option value="JRH">Jorhat, JRH</option>
+                            <option value="CDP">Kadapa, CDP</option>
+                            <option value="IXH">Kailasahar, IXH</option>
+                            <option value="IXQ">Kamalpur, IXQ</option>
+                            <option value="IXY">Kandla, IXY</option>
+                            <option value="KNU">Kanpur, KNU</option>
+                            <option value="IXK">Keshod, IXK</option>
+                            <option value="HJR">Khajuraho, HJR</option>
+                            <option value="KLH">Kolhapur, KLH</option>
+                            <option value="CCU">Kolkata, CCU</option>
+                            <option value="KTU">Kota, KTU</option>
+                            <option value="CCJ">Kozhikode, CCJ</option>
+                            <option value="KUU">Kullu, KUU</option>
+                            <option value="LTU">Latur, LTU</option>
+                            <option value="IXL">Leh, IXL</option>
+                            <option value="IXI">Lilabari, IXI</option>
+                            <option value="LKO">Lucknow, LKO</option>
+                            <option value="LUH">Ludhiana, LUH</option>
+                            <option value="IXM">Madurai, IXM</option>
+                            <option value="LDA">Maldah, LDA</option>
+                            <option value="IXE">Mangalore, IXE</option>
+                            <option value="MOH">Mohanbari, MOH</option>
+                            <option value="BOM">Mumbai, BOM</option>
+                            <option value="MYQ">Mysore, MYQ</option>
+                            <option value="NAG">Nagpur, NAG</option>
+                            <option value="NAL">Nalchik, NAL</option>
+                            <option value="NDC">Nanded, NDC</option>
+                            <option value="ISK">Nashik, ISK</option>
+                            <option value="NVY">Neiveli, NVY</option>
+                            <option value="PGH">Pantnagar, PGH</option>
+                            <option value="IXP">Pathankot, IXP</option>
+                            <option value="PAT">Patna, PAT</option>
+                            <option value="PNY">Pondicherry, PNY</option>
+                            <option value="PBD">Porbandar, PBD</option>
+                            <option value="IXZ">Port Blair, IXZ</option>
+                            <option value="PNQ">Pune, PNQ</option>
+                            <option value="PUT">Puttaparthi, PUT</option>
+                            <option value="RPR">Raipur, RPR</option>
+                            <option value="RJA">Rajahmundry, RJA</option>
+                            <option value="RAJ">Rajkot, RAJ</option>
+                            <option value="RJI">Rajouri, RJI</option>
+                            <option value="IXR">Ranchi, IXR</option>
+                            <option value="RRK">Raurkela, RRK</option>
+                            <option value="REW">Rewa, REW</option>
+                            <option value="RUP">Rupshi, RUP</option>
+                            <option value="SXV">Salem, SXV</option>
+                            <option value="TNI">Satna, TNI</option>
+                            <option value="SHL">Shillong, SHL</option>
+                            <option value="SLV">Shimla, SLV</option>
+                            <option value="SAG">Shirdi, SAG</option>
+                            <option value="IXS">Silchar, IXS</option>
+                            <option value="IXB">Siliguri, IXB</option>
+                            <option value="KDU">Skardu, KDU</option>
+                            <option value="SSE">Solapur, SSE</option>
+                            <option value="SXR">Srinagar, SXR</option>
+                            <option value="STV">Surat, STV</option>
+                            <option value="TEZ">Tezpur, TEZ</option>
+                            <option value="TEI">Tezu, TEI</option>
+                            <option value="TRV">Thiruvananthapuram, TRV</option>
+                            <option value="TCR">Thoothukkudi, TCR</option>
+                            <option value="TRZ">iruchirappalli, TRZ</option>
+                            <option value="TIR">Tirupati, TIR</option>
+                            <option value="UDR">Udaipur, UDR</option>
+                            <option value="BDQ">Vadodara, BDQ</option>
+                            <option value="VNS">Varanasi, VNS</option>
+                            <option value="VGA">Vijayawada, VGA</option>
+                            <option value="VTZ">Visakhapatnam, VTZ</option>
+                            <option value="WGC">Warrangal, WGC</option>
+                        </select>
+                    </div>
+                    <div class="col s2 m2 l1" style="padding-left:2%;padding-top:20px;">
+                        <i class="material-icons prefix" style="font-size:30px;margin-top:35px;">arrow_forward</i>
+                    </div>
+                    <div class="input-field col s5 m5 l2" style="padding-top:20px;">
+                        <select class="input-field browser-default" style="background-color:#06243a;color:white" id="toair">
+                            <option value="" disabled selected>To</option>
+                            <option value="IXA">Agartala, IXA</option>
+                            <option value="AGX">Agatti Island, AGX</option>
+                            <option value="AGR">Agra, AGR</option>
+                            <option value="AMDa">Ahmedabad, AMDa</option>
+                            <option value="AJL">Aizawl, AJL</option>
+                            <option value="AKD">Akola, AKD</option>
+                            <option value="IXD">Allahabad, IXD</option>
+                            <option value="IXV">Along, IXV</option>
+                            <option value="ATQ">Amritsar, ATQ</option>
+                            <option value="IXU">Aurangabad, IXU</option>
+                            <option value="BLR">Bangalore, BLR</option>
+                            <option value="BEK">Bareilly, BEK</option>
+                            <option value="BUP">Bathinda, BUP</option>
+                            <option value="IXG">Belgaum, IXG</option>
+                            <option value="BEP">Bellary, BEP</option>
+                            <option value="VDY">Bellary, VDY</option>
+                            <option value="BHU">Bhavnagar, BHU</option>
+                            <option value="BHO">Bhopal, BHO</option>
+                            <option value="BBI">Bhubaneswar, BBI</option>
+                            <option value="BHJ">Bhuj, BHJ</option>
+                            <option value="BKB">Bikaner, BKB</option>
+                            <option value="PAB">Bilaspur, PAB</option>
+                            <option value="CBD">Car Nicobar, CBD</option>
+                            <option value="IXC">Chandigarh, IXC</option>
+                            <option value="MAA">Chennai, MAA</option>
+                            <option value="CJB">Coimbatore, CJB</option>
+                            <option value="COH">Cooch Behar, COH</option>
+                            <option value="NMB">Daman, NMB</option>
+                            <option value="DED">Dehradun, DED</option>
+                            <option value="DEL">Delhi, DEL</option>
+                            <option value="DBD">Dhanbad, DBD</option>
+                            <option value="DHM">Dharmsala, DHM</option>
+                            <option value="DIB">Dibrugarh, DIB</option>
+                            <option value="DMU">Dimapur, DMU</option>
+                            <option value="DIU">Diu, DIU</option>
+                            <option value="RDP">Durgapur, RDP</option>
+                            <option value="COK">Ernakulam, COK</option>
+                            <option value="GAY">Gaya, GAY</option>
+                            <option value="GOI">Goa, GOI</option>
+                            <option value="GOP">Gorakhpur, GOP</option>
+                            <option value="GAU">Guwahati, GAU</option>
+                            <option value="GWL">Gwalior, GWL</option>
+                            <option value="HBX">Hubli, HBX</option>
+                            <option value="HYD">Hyderabad, HYD</option>
+                            <option value="IMF">Imphal, IMF</option>
+                            <option value="IDR">Indore, IDR</option>
+                            <option value="JLR">Jabalpur, JLR</option>
+                            <option value="JGB">Jagdalpur, JGB</option>
+                            <option value="JAI">Jaipur, JAI</option>
+                            <option value="JSA">Jaisalmer, JSA</option>
+                            <option value="IXJ">Jammu, IXJ</option>
+                            <option value="JGA">Jamnagar, JGA</option>
+                            <option value="IXW">Jamshedpur, IXW</option>
+                            <option value="JDH">Jodhpur, JDH</option>
+                            <option value="JRH">Jorhat, JRH</option>
+                            <option value="CDP">Kadapa, CDP</option>
+                            <option value="IXH">Kailasahar, IXH</option>
+                            <option value="IXQ">Kamalpur, IXQ</option>
+                            <option value="IXY">Kandla, IXY</option>
+                            <option value="KNU">Kanpur, KNU</option>
+                            <option value="IXK">Keshod, IXK</option>
+                            <option value="HJR">Khajuraho, HJR</option>
+                            <option value="KLH">Kolhapur, KLH</option>
+                            <option value="CCU">Kolkata, CCU</option>
+                            <option value="KTU">Kota, KTU</option>
+                            <option value="CCJ">Kozhikode, CCJ</option>
+                            <option value="KUU">Kullu, KUU</option>
+                            <option value="LTU">Latur, LTU</option>
+                            <option value="IXL">Leh, IXL</option>
+                            <option value="IXI">Lilabari, IXI</option>
+                            <option value="LKO">Lucknow, LKO</option>
+                            <option value="LUH">Ludhiana, LUH</option>
+                            <option value="IXM">Madurai, IXM</option>
+                            <option value="LDA">Maldah, LDA</option>
+                            <option value="IXE">Mangalore, IXE</option>
+                            <option value="MOH">Mohanbari, MOH</option>
+                            <option value="BOM">Mumbai, BOM</option>
+                            <option value="MYQ">Mysore, MYQ</option>
+                            <option value="NAG">Nagpur, NAG</option>
+                            <option value="NAL">Nalchik, NAL</option>
+                            <option value="NDC">Nanded, NDC</option>
+                            <option value="ISK">Nashik, ISK</option>
+                            <option value="NVY">Neiveli, NVY</option>
+                            <option value="PGH">Pantnagar, PGH</option>
+                            <option value="IXP">Pathankot, IXP</option>
+                            <option value="PAT">Patna, PAT</option>
+                            <option value="PNY">Pondicherry, PNY</option>
+                            <option value="PBD">Porbandar, PBD</option>
+                            <option value="IXZ">Port Blair, IXZ</option>
+                            <option value="PNQ">Pune, PNQ</option>
+                            <option value="PUT">Puttaparthi, PUT</option>
+                            <option value="RPR">Raipur, RPR</option>
+                            <option value="RJA">Rajahmundry, RJA</option>
+                            <option value="RAJ">Rajkot, RAJ</option>
+                            <option value="RJI">Rajouri, RJI</option>
+                            <option value="IXR">Ranchi, IXR</option>
+                            <option value="RRK">Raurkela, RRK</option>
+                            <option value="REW">Rewa, REW</option>
+                            <option value="RUP">Rupshi, RUP</option>
+                            <option value="SXV">Salem, SXV</option>
+                            <option value="TNI">Satna, TNI</option>
+                            <option value="SHL">Shillong, SHL</option>
+                            <option value="SLV">Shimla, SLV</option>
+                            <option value="SAG">Shirdi, SAG</option>
+                            <option value="IXS">Silchar, IXS</option>
+                            <option value="IXB">Siliguri, IXB</option>
+                            <option value="KDU">Skardu, KDU</option>
+                            <option value="SSE">Solapur, SSE</option>
+                            <option value="SXR">Srinagar, SXR</option>
+                            <option value="STV">Surat, STV</option>
+                            <option value="TEZ">Tezpur, TEZ</option>
+                            <option value="TEI">Tezu, TEI</option>
+                            <option value="TRV">Thiruvananthapuram, TRV</option>
+                            <option value="TCR">Thoothukkudi, TCR</option>
+                            <option value="TRZ">iruchirappalli, TRZ</option>
+                            <option value="TIR">Tirupati, TIR</option>
+                            <option value="UDR">Udaipur, UDR</option>
+                            <option value="BDQ">Vadodara, BDQ</option>
+                            <option value="VNS">Varanasi, VNS</option>
+                            <option value="VGA">Vijayawada, VGA</option>
+                            <option value="VTZ">Visakhapatnam, VTZ</option>
+                            <option value="WGC">Warrangal, WGC</option>
+                        </select>
+                    </div>
+                    <div class="col s6 m6 l2" id="one" style="padding-top:20px;">
+                        <i class="material-icons prefix">date_range</i>
+                        <label for="datepicker" style="background:transparent">Depart</label>
+                        <input type="text" class="datepicker" id="datepicker" name="oneway" style="color: white" placeholder="Select Date">
+                    </div>
+                    <div class="col s6 m6 l2" id="return" style="padding-top:20px;">
+                        <i class="material-icons prefix">date_range</i>
+                        <label for="datepicker1" style="background:transparent">Return</label>
+                        <input type="text" class="datepicker" id="datepicker1" name="return" style="color: white" placeholder="Select Date">
+                    </div>
+                    <div class="col s4 offset-s4 m4 offset-m4 l1" style="padding-top:20px;">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input placeholder="Travellers" type="number" class="validate" style="color:white;text-align: center;" id="passengers">
+                    </div>
+                    <div class="col l1 s6 offset-s1 m4 offset-m4 center">
+                        <b>
+                            <input class="search " id="search" name="search" type="submit" style="font-size:16px;border-radius:10px; margin-top: 30px;margin-left: 30px;" value="Search Flights">
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="filter_div_oneway">
+        </div>
+        <div id="filter_div_return">
+        </div>
+        <div id="res">
+        </div>
+        <div class="row col s12 m6 l8">
+            <div id="paginationDiv" class="col s12 l7 offset-l1 onewayPagination">
+            </div>
+        </div>
+        <div class="row col s12 m6 l8">
+            <div id="paginationDiv2" class="col s12 l7 offset-l1 returnPagination" style="display: none;">
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="card transparent" style="padding: 10px;margin: 20px 20px 20px 20px;box-shadow: 0 0 0 0;">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="img/New folder/newcard.jpg" style="width: 100%;height: auto">
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l4 city_card">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="img/New folder/hyd.jpg" style="height:250px; width:100%;">
+                            <span class="card-title">FLY TO HYD</span>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-weight: 250;font-size: 18px">DEL--> HYD 8950/-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l4 city_card">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="img/New folder/delhi.jpg" style="height:250px; width:100%;">
+                            <span class="card-title">FLY TO DELHI</span>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-weight: 250;font-size: 18px">MAA--> DEL 4430/-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l4 city_card">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="img/New folder/goa.jpg" style="height:250px; width:100%;">
+                            <span class="card-title ">FLY TO GOA</span>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-weight: 250;font-size: 18px">DEL-->GOA 5540/-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l4 city_card">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="img/bangalore.jpg" style="height:250px; width:100%;">
+                            <span class="card-title">FLY TO BANGLORE</span>
+                        </div>
+                        <div class="card-content">
+                            <div style="font-weight: 250;font-size: 18px">DEL->BLG 5850/-</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l4 city_card">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="img/New folder/goa.jpg" style="height:250px; width:100%;">
+                            <span class="card-title">FLY TO LUCKNOW</span>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-weight: 250;font-size: 18px">MAA -> LKO 6430/-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l4 city_card">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="img/New folder/mumbai.jpg" style="height:250px; width:100%;">
+                            <span class="card-title ">FLY TO MUMBAI</span>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-weight: 250;font-size: 18px">DEL-->BOM 5780/-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="page-footer" style="background-color:#06243a; opacity: 1;height: 290px">
+            <div class="container">
+                <div class="row">
+                    <div class="col s6 s12">
+                        <h5 class="white-text">ABOUT TRAVAIL</h5>
+                        <p style="font-size: 12px" class="grey-text text-lighten-4">Travail.com is the leading travel website for destination search and tour planning in India. Find comparison of the best deals in hotels, trains, flights, and travel packages, all at one place. TRAVAIL.com aggregates information from hundreds of travel sites to bring to you a range of offers and deals. With TRAVAIL.com, you can always plan your travel better.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <ul>
+                            <li><a class="fa fa-linkedin" href="#!"></a>
+                                <a href="#!" class="fa fa-facebook"></a>
+                                <a class="fa fa-twitter" href="#!"></a>
+                                <a class="fa fa-google" href="#!"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+           
+        </footer>
+    </div>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+    </script>
+</body>
+
+</html>

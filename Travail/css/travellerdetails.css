@@ -1,0 +1,12 @@
+@media only screen and (min-width: 600px) {
+	.src_dest{
+		font-size: 35px;
+	}
+	.timings{
+		font-size: 25px;
+	}
+	.fare{
+		font-size:35px;
+		
+	}
+}

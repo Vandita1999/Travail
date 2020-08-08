@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>TRAVAIL</title>
+    <link rel="stylesheet" href="css/materialize.css">
+    <link rel="stylesheet" href="css/contactus.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+body{
+    background-image: url('img/Anamnisar.jpg');
+}</style>
+
+<body>
+    <div class="topnav" id="myTopnav">
+        <a href="index.html"> <img src="img/v2.png" style="height: 60px;width:60px"></a>
+        <a href="index.html">FLIGHTS</a>
+        <a href="about.html">ABOUT US</a>
+        <a href="contactus.html">CONTACT US</a>
+        <a id="logout_button">
+            <i class="material-icons">power_settings_new</i>
+        </a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <br><br><br><br> <br>
+    
+            <div class="row">
+                <div class="col s12 m6 l8 offset-l1">
+                    <div class="card " style="background-color: #06243a">
+                        <div class="card-content white-text">
+                            <span class="card-title">Contact Us</span>
+                            <p>We are there to help you with all your queries.You can contact us on phone or on mail.
+                            the details arce given below</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="mailto:someone@example.com?Subject=Hello%20again" target="_top"><i class="material-icons">mail_outline</i></a>
+                            <a href="callto:8840929344"><i class="material-icons">call</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/contactus.js"></script>
+    <script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+    </script>
+</body>
+
+</html>
